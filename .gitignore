@@ -1,0 +1,21 @@
+# Build results
+cocos2d/
+proj.android/
+proj.ios_mac/
+proj.linux/
+proj.wp8-xaml/
+proj.win8.1-universal/
+
+# =========================
+# Windows detritus
+# =========================
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
