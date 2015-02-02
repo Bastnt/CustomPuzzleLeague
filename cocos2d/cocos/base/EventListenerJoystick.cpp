@@ -48,31 +48,37 @@ EventListenerJoystick::EventListenerJoystick()
 bool EventListenerJoystick::init()
 {
     auto listener = [this](Event* event){
-        auto joystick_event = static_cast<EventJoystick*>(event);
+        auto joystick_event = dynamic_cast<EventJoystick*>(event);
         switch (joystick_event->getJoystickEventType())
         {
             case EventJoystick::EventType::CONNECT:
+			{
                 if(onConnect != nullptr)
                     onConnect(event);
-                break;
+			} break;
             case EventJoystick::EventType::DISCONNECT:
+			{
                 if(onDisconnect != nullptr)
                     onDisconnect(event);
-                break;
+			} break;
             case EventJoystick::EventType::BUTTON_PRESSED:
-                if(onButtonPressed != nullptr)
-                    onButtonPressed(event);
-                break;
+			{
+				auto joystick_button_event = dynamic_cast<EventButtonJoystick*>(event);
+                if(joystick_button_event && onButtonPressed != nullptr)
+                    onButtonPressed(joystick_button_event->getIndexButton(), event);
+			} break;
             case EventJoystick::EventType::BUTTON_RELEASED:
-                if(onButtonReleased != nullptr)
-                    onButtonReleased(event);
-                break;
+			{
+				auto joystick_button_event = dynamic_cast<EventButtonJoystick*>(event);
+                if(joystick_button_event && onButtonReleased != nullptr)
+                    onButtonReleased(joystick_button_event->getIndexButton(), event);
+			} break;
             case EventJoystick::EventType::JOYSTICK_MOVE:
-                if(onJoystickMoved != nullptr)
+			{
+				if(onJoystickMoved != nullptr)
                     onJoystickMoved(event);
-                break;
-            default:
-                break;
+			} break;
+			default: {} break;
         }
     };
 

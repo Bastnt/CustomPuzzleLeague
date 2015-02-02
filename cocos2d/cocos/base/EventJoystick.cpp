@@ -26,4 +26,18 @@ void EventJoystick::setJoystickEventType(EventJoystick::EventType type)
 	joystick_event_type_ = type;
 }
 
+
+EventButtonJoystick::EventButtonJoystick(Joystick* joy, EventJoystick::EventType type, std::size_t index_button)
+: EventJoystick(joy, type), button_(index_button) {}
+	
+std::size_t EventButtonJoystick::getIndexButton() const
+{
+	return button_;
+}
+
+void EventButtonJoystick::setIndexButton(std::size_t button)
+{
+	button_ = button;
+}
+
 NS_CC_END

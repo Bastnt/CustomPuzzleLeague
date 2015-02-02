@@ -1,6 +1,7 @@
 #include "HelloWorldScene.h"
 #include "base/EventListenerJoystick.h"
 #include "base/EventJoystick.h"
+#include "base/Joystick.h"
 
 USING_NS_CC;
 
@@ -81,17 +82,16 @@ bool HelloWorld::init()
     };
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-	/*auto listener2 = EventListenerJoystick::create();
-	listener2->onJoystickMoved = [] (Event* event)
+	auto listener2 = EventListenerJoystick::create();
+	listener2->onButtonPressed = [] (std::size_t index_button, Event* event)
 	{
-		auto casted = dynamic_cast<EventJoystick*>(event);
-		if(casted)
-		{
-			log("casted name: %s", casted->getJoystick().);
-		}
+		log("Button %u pressed!", index_button);
 	};
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener2, this);*/
-
+	listener2->onButtonReleased = [] (std::size_t index_button, Event* event)
+	{
+		log("Button %u released!", index_button);
+	};
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener2, this);
 
     return true;
 }

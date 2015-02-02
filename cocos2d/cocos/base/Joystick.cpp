@@ -1,5 +1,7 @@
 #include "base/Joystick.h"
 
-USING_NS_CC;
+NS_CC_BEGIN
 
-Joystick::Joystick() : present(false) {}
+Joystick::Joystick() {}
+
+NS_CC_END
