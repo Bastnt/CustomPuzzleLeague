@@ -54,17 +54,16 @@ void JoystickManager::PollEvents()
 			UpdateRawDatas(i);
 
 			//Initializes button states and repetition clocks
-			joysticks[i]->button_states = std::vector<bool>(joysticks[i]->button_values_count_, false);
-			joysticks[i]->repetition_clocks_ = std::vector<RepetitionClock>(joysticks[i]->button_values_count_, { true });
+			joysticks[i]->Init();
 
 			//Sends event
-			EventJoystick event { joysticks[i].get(), EventJoystick::EventType::CONNECT };
+			EventJoystick event { joysticks[i].get(), EventJoystick::Type::CONNECT };
 			Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 		}
 		else if(!present && joysticks[i])
 		{
 			//Sends event
-			EventJoystick event { joysticks[i].get(), EventJoystick::EventType::DISCONNECT };
+			EventJoystick event { joysticks[i].get(), EventJoystick::Type::DISCONNECT };
 			Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 
 			//Removes the Joystick from the array
@@ -83,7 +82,7 @@ void JoystickManager::PollEvents()
 				{
 					button_states[j] = false;//being released
 					joysticks[i]->repetition_clocks_[j].Stop();
-					EventButtonJoystick event { joysticks[i].get(), EventJoystick::EventType::BUTTON_RELEASED, j };
+					EventButtonJoystick event { joysticks[i].get(), EventJoystick::Type::BUTTON_RELEASED, j };
 					Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 				}
 				else if(joysticks[i]->button_values_[j])
@@ -95,19 +94,28 @@ void JoystickManager::PollEvents()
 						//Starts the clock for repetition effect
 						joysticks[i]->repetition_clocks_[j].Start(clock_.now());
 
-						EventButtonJoystick event { joysticks[i].get(), EventJoystick::EventType::BUTTON_PRESSED, j };
+						EventButtonJoystick event { joysticks[i].get(), EventJoystick::Type::BUTTON_PRESSED, j };
 						Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 					}
 					else if(button_states[j] && joysticks[i]->repetition_clocks_[j].ConsiderInput(clock_.now()))//being pressed later on with repetition effect
 					{
-						EventButtonJoystick event { joysticks[i].get(), EventJoystick::EventType::BUTTON_PRESSED, j };
+						EventButtonJoystick event { joysticks[i].get(), EventJoystick::Type::BUTTON_PRESSED, j };
 						Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 					}
 				}
 			}
 
 			//Updates button states and sends events (also: repetition effect handling)
-			///TODO
+			std::vector<JoystickAxe>& axes { joysticks[i]->axes };
+			for(std::size_t j = 0U, end_j = axes.size(); j < end_j; ++j)
+			{
+				axes[j].value = joysticks[i]->axes_[j];
+				if(axes[j].HasInput())
+				{
+					EventAxeJoystick event { joysticks[i].get(), EventJoystick::Type::AXE_ENABLED, j };
+					Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
+				}
+			}
 		}
 	}
 }

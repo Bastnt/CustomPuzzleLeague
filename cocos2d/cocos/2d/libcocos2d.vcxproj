@@ -284,6 +284,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\release-lib\*.*
     <ClCompile Include="..\base\etc1.cpp" />
     <ClCompile Include="..\base\EventJoystick.cpp" />
     <ClCompile Include="..\base\EventListenerJoystick.cpp" />
+    <ClCompile Include="..\base\JoystickAxe.cpp" />
     <ClCompile Include="..\base\JoystickManager.cpp" />
     <ClCompile Include="..\base\Joystick.cpp" />
     <ClCompile Include="..\base\pvr.cpp" />
@@ -668,6 +669,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\release-lib\*.*
     <ClInclude Include="..\base\EventListenerJoystick.h" />
     <ClInclude Include="..\base\firePngData.h" />
     <ClInclude Include="..\base\Joystick.h" />
+    <ClInclude Include="..\base\JoystickAxe.h" />
     <ClInclude Include="..\base\JoystickManager.h" />
     <ClInclude Include="..\base\ObjectFactory.h" />
     <ClInclude Include="..\base\pvr.h" />

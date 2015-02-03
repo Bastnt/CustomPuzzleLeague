@@ -3,6 +3,7 @@
 
 #include "platform/CCPlatformMacros.h"
 #include "base/RepetitionClock.h"
+#include "base/JoystickAxe.h"
 
 #include <chrono>
 #include <vector>
@@ -15,6 +16,9 @@ class CC_DLL Joystick
 public:
 	//States of the buttons
 	std::vector<bool> button_states;//true: pressed, false: released
+
+	//States of the joysticks
+	std::vector<JoystickAxe> axes;
 
 	//Basic constructor
     Joystick();
@@ -39,6 +43,9 @@ private:
 	
 	//The repetition clock
 	std::vector<RepetitionClock> repetition_clocks_;
+
+	//Initialize members after first raw data
+	void Init();
 };
 
 NS_CC_END

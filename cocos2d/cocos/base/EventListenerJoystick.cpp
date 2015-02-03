@@ -17,7 +17,7 @@ EventListenerJoystick* EventListenerJoystick::clone()
         ret->autorelease();
         ret->onConnect = onConnect;
         ret->onDisconnect = onDisconnect;
-        ret->onJoystickMoved = onJoystickMoved;
+        ret->onAxeEnabled = onAxeEnabled;
         ret->onButtonReleased = onButtonReleased;
         ret->onButtonPressed = onButtonPressed;
     }
@@ -42,44 +42,46 @@ EventListenerJoystick* EventListenerJoystick::create()
 }
 
 EventListenerJoystick::EventListenerJoystick()
-: onConnect(nullptr), onDisconnect(nullptr), onButtonPressed(nullptr), onButtonReleased(nullptr), onJoystickMoved(nullptr)
+: onConnect(nullptr), onDisconnect(nullptr), onButtonPressed(nullptr), onButtonReleased(nullptr), onAxeEnabled(nullptr)
 {}
 
 bool EventListenerJoystick::init()
 {
     auto listener = [this](Event* event){
         auto joystick_event = dynamic_cast<EventJoystick*>(event);
-        switch (joystick_event->getJoystickEventType())
-        {
-            case EventJoystick::EventType::CONNECT:
+		if(joystick_event)
+			switch (joystick_event->getJoystickEventType())
 			{
-                if(onConnect != nullptr)
-                    onConnect(event);
-			} break;
-            case EventJoystick::EventType::DISCONNECT:
-			{
-                if(onDisconnect != nullptr)
-                    onDisconnect(event);
-			} break;
-            case EventJoystick::EventType::BUTTON_PRESSED:
-			{
-				auto joystick_button_event = dynamic_cast<EventButtonJoystick*>(event);
-                if(joystick_button_event && onButtonPressed != nullptr)
-                    onButtonPressed(joystick_button_event->getIndexButton(), event);
-			} break;
-            case EventJoystick::EventType::BUTTON_RELEASED:
-			{
-				auto joystick_button_event = dynamic_cast<EventButtonJoystick*>(event);
-                if(joystick_button_event && onButtonReleased != nullptr)
-                    onButtonReleased(joystick_button_event->getIndexButton(), event);
-			} break;
-            case EventJoystick::EventType::JOYSTICK_MOVE:
-			{
-				if(onJoystickMoved != nullptr)
-                    onJoystickMoved(event);
-			} break;
-			default: {} break;
-        }
+				case EventJoystick::Type::CONNECT:
+				{
+					if(onConnect != nullptr)
+						onConnect(joystick_event);
+				} break;
+				case EventJoystick::Type::DISCONNECT:
+				{
+					if(onDisconnect != nullptr)
+						onDisconnect(joystick_event);
+				} break;
+				case EventJoystick::Type::BUTTON_PRESSED:
+				{
+					auto joystick_button_event = dynamic_cast<EventButtonJoystick*>(joystick_event);
+					if(joystick_button_event && onButtonPressed != nullptr)
+						onButtonPressed(joystick_button_event);
+				} break;
+				case EventJoystick::Type::BUTTON_RELEASED:
+				{
+					auto joystick_button_event = dynamic_cast<EventButtonJoystick*>(joystick_event);
+					if(joystick_button_event && onButtonReleased != nullptr)
+						onButtonReleased(joystick_button_event);
+				} break;
+				case EventJoystick::Type::AXE_ENABLED:
+				{			 
+					auto joystick_axe_event = dynamic_cast<EventAxeJoystick*>(joystick_event);
+					if(onAxeEnabled != nullptr)
+						onAxeEnabled(joystick_axe_event);
+				} break;
+				default: {} break;
+			}
     };
 
     if (EventListener::init(Type::JOYSTICK, LISTENER_ID, listener))
@@ -89,4 +91,5 @@ bool EventListenerJoystick::init()
     
     return false;
 }
+
 NS_CC_END
