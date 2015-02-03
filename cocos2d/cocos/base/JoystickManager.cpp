@@ -105,14 +105,14 @@ void JoystickManager::PollEvents()
 				}
 			}
 
-			//Updates button states and sends events (also: repetition effect handling)
+			//Updates axes and sends events
 			std::vector<JoystickAxe>& axes { joysticks[i]->axes };
 			for(std::size_t j = 0U, end_j = axes.size(); j < end_j; ++j)
 			{
 				axes[j].value = joysticks[i]->axes_[j];
 				if(axes[j].HasInput())
 				{
-					EventAxeJoystick event { joysticks[i].get(), EventJoystick::Type::AXE_ENABLED, j };
+					EventAxeJoystick event { joysticks[i].get(), EventJoystick::Type::AXE_MOVED, j };
 					Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 				}
 			}

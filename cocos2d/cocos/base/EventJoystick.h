@@ -16,7 +16,7 @@ public:
 	//Different types of Joystick Event
     enum class Type
     {
-		AXE_ENABLED,
+		AXE_MOVED,
         BUTTON_PRESSED,
 		BUTTON_RELEASED,
 		CONNECT,
