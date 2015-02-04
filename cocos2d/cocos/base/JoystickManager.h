@@ -27,10 +27,13 @@ public:
 	static JoystickManager& Instance();
 
 	//The joysticks (16 is the max amount of recognized joysticks)
-	std::array<std::shared_ptr<Joystick>, 16U> joysticks;
+	std::array<std::unique_ptr<Joystick>, 16U> joysticks;
 
 	//Poll the events
 	void PollEvents();
+
+	//Reconnects the joysticks (sends connect events)
+	void ReconnectJoysticks();
 
 private:
 	static std::unique_ptr<JoystickManager> instance_;

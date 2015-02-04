@@ -20,6 +20,14 @@ public:
 	//States of the joysticks
 	std::vector<JoystickAxe> axes;
 
+	//The repetition clock for the buttons
+	std::vector<RepetitionClock> repetition_clocks;
+
+	//Index of the joystick
+	int getIndex() const;
+	//Name of the joystick
+	std::string getName() const;
+
 	//Basic constructor
     Joystick();
 
@@ -41,8 +49,6 @@ private:
     int axes_count_;
     const float* axes_;
 	
-	//The repetition clock
-	std::vector<RepetitionClock> repetition_clocks_;
 
 	//Initialize members after first raw data
 	void Init();

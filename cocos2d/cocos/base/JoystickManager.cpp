@@ -23,19 +23,8 @@ void JoystickManager::Kill()
 
 JoystickManager::JoystickManager(const private_structure &) 
 {
-	/*std::array<int, 9U> microsoft;
-	microsoft[static_cast<std::size_t>(Joystick::Button::BUTTON_A)] = 0;
-	microsoft[static_cast<std::size_t>(Joystick::Button::BUTTON_B)] = 1;
-	microsoft[static_cast<std::size_t>(Joystick::Button::BUTTON_START)] = 7;
-	microsoft[static_cast<std::size_t>(Joystick::Button::POV_UP)] = 10;
-	microsoft[static_cast<std::size_t>(Joystick::Button::POV_RIGHT)] = 11;
-	microsoft[static_cast<std::size_t>(Joystick::Button::POV_DOWN)] = 12;
-	microsoft[static_cast<std::size_t>(Joystick::Button::POV_LEFT)] = 13;
-	microsoft[static_cast<std::size_t>(Joystick::Button::BUTTON_L)] = 4;
-	microsoft[static_cast<std::size_t>(Joystick::Button::BUTTON_R)] = 5;
-
-	button_mappings["Pilote de joystick PC Microsoft"] = microsoft;
-	button_mappings["Default"] = microsoft;*/
+	for(int i = 0; i < 16; ++i)
+		joysticks[i] = nullptr;
 }
 
 void JoystickManager::PollEvents()
@@ -46,7 +35,7 @@ void JoystickManager::PollEvents()
 		if(present && joysticks[i]==nullptr)
 		{
 			//Adds the Joystick to the array
-			joysticks[i] = std::make_shared<Joystick>();
+			joysticks[i] = std::make_unique<Joystick>();
 
 			//Raw datas
 			joysticks[i]->id_ = i;
@@ -76,12 +65,13 @@ void JoystickManager::PollEvents()
 
 			//Updates button states and sends events (also: repetition effect handling)
 			std::vector<bool>& button_states { joysticks[i]->button_states };
+
 			for(std::size_t j = 0U, end_j = button_states.size(); j < end_j; ++j)
 			{
 				if(button_states[j] && !joysticks[i]->button_values_[j])
 				{
 					button_states[j] = false;//being released
-					joysticks[i]->repetition_clocks_[j].Stop();
+					joysticks[i]->repetition_clocks[j].Stop();
 					EventButtonJoystick event { joysticks[i].get(), EventJoystick::Type::BUTTON_RELEASED, j };
 					Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 				}
@@ -92,12 +82,12 @@ void JoystickManager::PollEvents()
 						button_states[j] = true;
 
 						//Starts the clock for repetition effect
-						joysticks[i]->repetition_clocks_[j].Start(clock_.now());
+						joysticks[i]->repetition_clocks[j].Start(clock_.now());
 
 						EventButtonJoystick event { joysticks[i].get(), EventJoystick::Type::BUTTON_PRESSED, j };
 						Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 					}
-					else if(button_states[j] && joysticks[i]->repetition_clocks_[j].ConsiderInput(clock_.now()))//being pressed later on with repetition effect
+					else if(button_states[j] && joysticks[i]->repetition_clocks[j].ConsiderInput(clock_.now()))//being pressed later on with repetition effect
 					{
 						EventButtonJoystick event { joysticks[i].get(), EventJoystick::Type::BUTTON_PRESSED, j };
 						Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
@@ -112,12 +102,26 @@ void JoystickManager::PollEvents()
 				axes[j].value = joysticks[i]->axes_[j];
 				if(axes[j].HasInput())
 				{
+					axes[j].moved = true;
 					EventAxeJoystick event { joysticks[i].get(), EventJoystick::Type::AXE_MOVED, j };
+					Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
+				}
+				else if(axes[j].moved)
+				{
+					axes[j].moved = false;
+					EventAxeJoystick event { joysticks[i].get(), EventJoystick::Type::AXE_NEUTRALIZED, j };
 					Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 				}
 			}
 		}
 	}
+}
+
+void JoystickManager::ReconnectJoysticks()
+{
+	for(int i = 0; i < 16; ++i)
+		joysticks[i] = nullptr;
+	PollEvents();
 }
 
 void JoystickManager::UpdateRawDatas(int i /*index_joystick */)

@@ -18,6 +18,7 @@ EventListenerJoystick* EventListenerJoystick::clone()
         ret->onConnect = onConnect;
         ret->onDisconnect = onDisconnect;
         ret->onAxeMoved = onAxeMoved;
+		ret->onAxeNeutralized = onAxeNeutralized;
         ret->onButtonReleased = onButtonReleased;
         ret->onButtonPressed = onButtonPressed;
     }
@@ -44,7 +45,7 @@ EventListenerJoystick* EventListenerJoystick::create()
 EventListenerJoystick::EventListenerJoystick()
 : onConnect(nullptr), onDisconnect(nullptr), 
 onButtonPressed(nullptr), onButtonReleased(nullptr), 
-onAxeMoved(nullptr)
+onAxeMoved(nullptr), onAxeNeutralized(nullptr)
 {}
 
 bool EventListenerJoystick::init()
@@ -81,6 +82,12 @@ bool EventListenerJoystick::init()
 					auto joystick_axe_event = dynamic_cast<EventAxeJoystick*>(joystick_event);
 					if(joystick_axe_event && onAxeMoved != nullptr)
 						onAxeMoved(joystick_axe_event);
+				} break;
+				case EventJoystick::Type::AXE_NEUTRALIZED:
+				{			 
+					auto joystick_axe_event = dynamic_cast<EventAxeJoystick*>(joystick_event);
+					if(joystick_axe_event && onAxeNeutralized != nullptr)
+						onAxeNeutralized(joystick_axe_event);
 				} break;
 				default: {} break;
 			}

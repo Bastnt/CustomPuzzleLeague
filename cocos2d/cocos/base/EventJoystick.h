@@ -17,6 +17,7 @@ public:
     enum class Type
     {
 		AXE_MOVED,
+		AXE_NEUTRALIZED,
         BUTTON_PRESSED,
 		BUTTON_RELEASED,
 		CONNECT,

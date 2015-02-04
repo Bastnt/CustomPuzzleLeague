@@ -25,6 +25,7 @@ public:
     std::function<void (EventButtonJoystick* event)> onButtonPressed;
     std::function<void (EventButtonJoystick* event)> onButtonReleased;
     std::function<void (EventAxeJoystick* event)> onAxeMoved;
+    std::function<void (EventAxeJoystick* event)> onAxeNeutralized;
 
 CC_CONSTRUCTOR_ACCESS:
     EventListenerJoystick();
