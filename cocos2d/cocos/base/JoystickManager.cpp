@@ -46,13 +46,13 @@ void JoystickManager::PollEvents()
 			joysticks[i]->Init();
 
 			//Sends event
-			EventJoystick event { joysticks[i].get(), EventJoystick::Type::CONNECT };
+			EventJoystick event { *joysticks[i], EventJoystick::Type::CONNECT };
 			Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 		}
 		else if(!present && joysticks[i])
 		{
 			//Sends event
-			EventJoystick event { joysticks[i].get(), EventJoystick::Type::DISCONNECT };
+			EventJoystick event { *joysticks[i], EventJoystick::Type::DISCONNECT };
 			Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 
 			//Removes the Joystick from the array
@@ -72,7 +72,7 @@ void JoystickManager::PollEvents()
 				{
 					button_states[j] = false;//being released
 					joysticks[i]->repetition_clocks[j].Stop();
-					EventButtonJoystick event { joysticks[i].get(), EventJoystick::Type::BUTTON_RELEASED, j };
+					EventButtonJoystick event { *joysticks[i], EventJoystick::Type::BUTTON_RELEASED, j };
 					Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 				}
 				else if(joysticks[i]->button_values_[j])
@@ -84,12 +84,12 @@ void JoystickManager::PollEvents()
 						//Starts the clock for repetition effect
 						joysticks[i]->repetition_clocks[j].Start(clock_.now());
 
-						EventButtonJoystick event { joysticks[i].get(), EventJoystick::Type::BUTTON_PRESSED, j };
+						EventButtonJoystick event { *joysticks[i], EventJoystick::Type::BUTTON_PRESSED, j };
 						Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 					}
 					else if(button_states[j] && joysticks[i]->repetition_clocks[j].ConsiderInput(clock_.now()))//being pressed later on with repetition effect
 					{
-						EventButtonJoystick event { joysticks[i].get(), EventJoystick::Type::BUTTON_PRESSED, j };
+						EventButtonJoystick event { *joysticks[i], EventJoystick::Type::BUTTON_PRESSED, j };
 						Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 					}
 				}
@@ -103,13 +103,13 @@ void JoystickManager::PollEvents()
 				if(axes[j].HasInput())
 				{
 					axes[j].moved = true;
-					EventAxeJoystick event { joysticks[i].get(), EventJoystick::Type::AXE_MOVED, j };
+					EventAxeJoystick event { *joysticks[i], EventJoystick::Type::AXE_MOVED, j };
 					Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 				}
 				else if(axes[j].moved)
 				{
 					axes[j].moved = false;
-					EventAxeJoystick event { joysticks[i].get(), EventJoystick::Type::AXE_NEUTRALIZED, j };
+					EventAxeJoystick event { *joysticks[i], EventJoystick::Type::AXE_NEUTRALIZED, j };
 					Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 				}
 			}

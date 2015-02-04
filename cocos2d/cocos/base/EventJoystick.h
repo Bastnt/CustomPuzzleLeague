@@ -23,19 +23,19 @@ public:
 		CONNECT,
 		DISCONNECT,
     };
-    EventJoystick(Joystick* joy, EventJoystick::Type type);
+    EventJoystick(Joystick& joy, EventJoystick::Type type);
 
     Joystick& getJoystick() const;
     EventJoystick::Type getJoystickEventType() const;    
 protected:
-    Joystick* joystick_;
+    Joystick& joystick_;
 	EventJoystick::Type joystick_event_type_;
 };
 
 class CC_DLL EventButtonJoystick : public EventJoystick
 {
 public:
-    EventButtonJoystick(Joystick* joy, EventJoystick::Type type, std::size_t index_button);
+    EventButtonJoystick(Joystick& joy, EventJoystick::Type type, std::size_t index_button);
 	
     std::size_t getIndexButton() const;
 private:
@@ -46,7 +46,7 @@ private:
 class CC_DLL EventAxeJoystick : public EventJoystick
 {
 public:
-    EventAxeJoystick(Joystick* joy, EventJoystick::Type type, std::size_t index_axe);
+    EventAxeJoystick(Joystick& joy, EventJoystick::Type type, std::size_t index_axe);
 	
     std::size_t getIndexAxe() const;
 	JoystickAxe& getAxe() const;

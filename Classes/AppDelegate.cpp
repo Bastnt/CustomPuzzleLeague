@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
+#include "gamepad_manager.h"
 
 USING_NS_CC;
 
