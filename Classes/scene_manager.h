@@ -5,6 +5,7 @@
 #include <base\CCDirector.h>
 
 #include <memory>
+#include "start_screen.h"
 
 class AppDelegate;
 

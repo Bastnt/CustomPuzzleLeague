@@ -5,6 +5,8 @@
 #include "event_listener_gamepad.h"
 #include "event_gamepad.h"
 
+#include "theme_manager.h"
+
 cocos2d::Scene* StartScreen::createScene()
 {
 	auto scene = cocos2d::Scene::create();
@@ -20,22 +22,17 @@ bool StartScreen::init()
 		return false;
 	}
 
-	auto bg = cocos2d::Sprite::create("bg.jpg");
-	bg->setAnchorPoint({0.f, 0.f});
-	addChild(bg, 1);
+	ThemeManager::Instance().AddElementsToNode("start_screen", dynamic_cast<cocos2d::Node*>(this));
 
 	auto listener = EventListenerGamepad::create();
 	listener->onPressed = [] (EventInputGamepad* event)
 	{
+		if(event->getInput() == EventInputGamepad::Input::VALIDATION_PAUSE)
+		{
 #ifdef _DEBUG
-		cocos2d::log("A valid input was pressed!");
+		cocos2d::log("Pressed start!");
 #endif
-	};
-	listener->onReleased = [] (EventInputGamepad* event)
-	{
-#ifdef _DEBUG
-		cocos2d::log("A valid input was released!");
-#endif
+		}
 	};
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 	
