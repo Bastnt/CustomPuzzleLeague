@@ -48,19 +48,21 @@
     <ClCompile Include="..\Classes\start_screen.h">
       <Filter>src\scenes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>src\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Game.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\random_generator.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Matrix.cpp">
+    <ClCompile Include="..\Classes\app_delegate.cpp">
+      <Filter>src\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\board.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameConfig.cpp" />
+    <ClCompile Include="..\Classes\session.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\session_scene.cpp">
+      <Filter>src\scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -84,20 +86,20 @@
     <ClInclude Include="..\Classes\scene_manager.h">
       <Filter>src\engine</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>src\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Game.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\random_generator.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Matrix.h">
+    <ClInclude Include="..\Classes\app_delegate.h">
+      <Filter>src\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\session.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameConfig.h">
+    <ClInclude Include="..\Classes\board.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\session_scene.h">
+      <Filter>src\scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

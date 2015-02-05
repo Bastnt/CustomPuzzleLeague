@@ -1,0 +1,9 @@
+death latence :
+
+chain :
+set 5, add: 1
+set: 10, add: 3 (danger)
+
+combo :
+set: combo/2, add: 1
+set: 10, add: 1 (danger)

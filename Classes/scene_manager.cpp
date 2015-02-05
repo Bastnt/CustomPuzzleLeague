@@ -1,7 +1,7 @@
 #include "scene_manager.h"
 
 #include "start_screen.h"
-#include "Game.h"
+#include "session_scene.h"
 
 std::unique_ptr<SceneManager> SceneManager::instance_ = nullptr;
 
@@ -23,6 +23,6 @@ SceneManager::SceneManager() {
 
 void SceneManager::StartInitialScene() const
 {
-	auto s = Game::createScene();
+	auto s = SessionScene::createScene();
 	director_->runWithScene(s);
 }

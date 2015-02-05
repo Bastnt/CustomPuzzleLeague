@@ -1,5 +1,4 @@
-#include "AppDelegate.h"
-#include "Game.h"
+#include "app_delegate.h"
 #include "scene_manager.h"
 #include "theme_manager.h"
 
