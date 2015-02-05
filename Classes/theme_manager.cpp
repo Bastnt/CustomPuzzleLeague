@@ -3,15 +3,10 @@
 #include <2d\CCSprite.h>
 
 
-std::unique_ptr<ThemeManager> ThemeManager::instance = nullptr;
+std::unique_ptr<ThemeManager> ThemeManager::instance_ = nullptr;
 
-ThemeManager& ThemeManager::Instance()
-{return *instance;}
-
-ThemeManager::ThemeManager(const ThemeManager::private_structure&) 
-	: path_current_theme("")
-{
-	LoadTheme("default");
+void ThemeManager::Init() {
+	ThemeManager::instance_.reset(new ThemeManager());
 }
 
 void ThemeManager::LoadTheme(const std::string& theme_name)
@@ -58,4 +53,18 @@ void ThemeManager::AddElementsToNode(const std::string& scene_name, cocos2d::Nod
 			}
 		}
 	}
+}
+
+void ThemeManager::Kill() {
+	ThemeManager::instance_ = nullptr;
+}
+
+ThemeManager& ThemeManager::Instance() {
+	return *instance_;
+}
+
+ThemeManager::ThemeManager() 
+{
+
+	LoadTheme("default");
 }

@@ -12,16 +12,14 @@ class AppDelegate;
 //Parses the themes and contains data about 'em
 class ThemeManager
 {
-	struct private_structure {
-	};
-	static std::unique_ptr<ThemeManager> instance;
-
 	//The theme object (JSON)
 	rapidjson::Document current_theme;
 	//The theme path
 	std::string path_current_theme;
+
+	ThemeManager();
+	static std::unique_ptr<ThemeManager> instance_;
 public:
-	explicit ThemeManager(const ThemeManager::private_structure&);
 	static ThemeManager& Instance();
 	
 	//Load the theme with provided name
@@ -30,7 +28,8 @@ public:
 	//Add children to the provided node based on the name
 	void AddElementsToNode(const std::string& scene_name, cocos2d::Node* node);
 
-	friend class AppDelegate;
+	static void Init();
+	static void Kill();
 };
 
 #endif

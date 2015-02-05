@@ -1,5 +1,5 @@
 #include "AppDelegate.h"
-
+#include "Game.h"
 #include "scene_manager.h"
 #include "theme_manager.h"
 
@@ -9,7 +9,7 @@ AppDelegate::AppDelegate() : gamepad_manager(nullptr) {
 
 }
 
-AppDelegate::~AppDelegate() 
+AppDelegate::~AppDelegate()
 {
 }
 
@@ -44,14 +44,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	//Creates instances
 	gamepad_manager =  std::make_unique<GamepadManager>();
-	SceneManager::instance = std::make_unique<SceneManager>(SceneManager::private_structure{});
-	ThemeManager::instance = std::make_unique<ThemeManager>(ThemeManager::private_structure{});
+	SceneManager::Init();
+	ThemeManager::Init();
 
-    // create a scene. it's an autorelease object
-    auto scene = SceneManager::Instance().GetInitialScene();
-
-    // run
-    director->runWithScene(scene);
+	// Start first scene
+	SceneManager::Instance().StartInitialScene();
 
     return true;
 }
