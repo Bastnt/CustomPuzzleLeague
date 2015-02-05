@@ -1,0 +1,7 @@
+{
+    "start_screen": {
+        "sprites": [    { "path": "start_screen/bg.jpg", "anchor": [0, 0], "z_index": 1 },
+                        { "path": "start_screen/press_start.png", "position": [960, 540], "z_index": 2 } ],
+        "sounds": [ "start_screen/bg.wav" ]
+    }
+}

@@ -4,6 +4,7 @@
 #include <2d\CCScene.h>
 
 #include <memory>
+#include "start_screen.h"
 
 class AppDelegate;
 

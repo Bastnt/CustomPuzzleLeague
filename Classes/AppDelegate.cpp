@@ -29,8 +29,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
+		//glview = GLViewImpl::create("Custom Puzzle League");
 		glview = GLViewImpl::createWithFullScreen("Custom Puzzle League");
-		//glview = GLViewImpl::createWithRect("Endless", Rect(0, 0, 1920, 1080), 1.f);
         director->setOpenGLView(glview);
     }
 

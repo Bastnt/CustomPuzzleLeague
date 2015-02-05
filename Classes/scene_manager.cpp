@@ -1,6 +1,5 @@
 #include "scene_manager.h"
 
-#include "start_screen.h"
 
 std::unique_ptr<SceneManager> SceneManager::instance = nullptr;
 
