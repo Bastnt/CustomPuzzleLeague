@@ -6,8 +6,11 @@
 
 #include <memory>
 #include <array>
+#include <string>
+#include <map>
 
 NS_CC_BEGIN
+
 class Event;
 class CC_DLL JoystickManager
 {
@@ -23,14 +26,24 @@ public:
 	//Gets the instance
 	static JoystickManager& Instance();
 
-	//The joysticks
-	std::array<Joystick, 16U> Joysticks;
+	//The joysticks (16 is the max amount of recognized joysticks)
+	std::array<std::unique_ptr<Joystick>, 16U> joysticks;
 
 	//Poll the events
 	void PollEvents();
 
+	//Reconnects the joysticks (sends connect events)
+	void ReconnectJoysticks();
+
 private:
 	static std::unique_ptr<JoystickManager> instance_;
+
+	//Handles the raw datas of the joystick of index i
+	void UpdateRawDatas(int i /*index_joystick */);
+
+	std::chrono::steady_clock clock_;
+	
 };
+
 NS_CC_END
-#endif /* defined(__cocos2d_libs__EventListenerJoystick__) */
+#endif

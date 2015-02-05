@@ -1,13 +1,15 @@
 #include "AppDelegate.h"
 #include "Game.h"
+#include "scene_manager.h"
+#include "theme_manager.h"
 
 USING_NS_CC;
 
-AppDelegate::AppDelegate() {
+AppDelegate::AppDelegate() : gamepad_manager(nullptr) {
 
 }
 
-AppDelegate::~AppDelegate() 
+AppDelegate::~AppDelegate()
 {
 }
 
@@ -27,21 +29,26 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLViewImpl::create("My Game");
+		glview = GLViewImpl::createWithFullScreen("Custom Puzzle League");
+		//glview = GLViewImpl::createWithRect("Endless", Rect(0, 0, 1920, 1080), 1.f);
         director->setOpenGLView(glview);
     }
 
     // turn on display FPS
     director->setDisplayStats(true);
 
+    glview->setDesignResolutionSize(1920, 1080, ResolutionPolicy::SHOW_ALL);//intern
+
     // set FPS. the default value is 1.0/60 if you don't call this
-    director->setAnimationInterval(1.0 / 60);
+    director->setAnimationInterval(1. / 60.);
 
-    // create a scene. it's an autorelease object
-    auto scene = Game::createScene();
+	//Creates instances
+	gamepad_manager =  std::make_unique<GamepadManager>();
+	SceneManager::Init();
+	ThemeManager::Init();
 
-    // run
-    director->runWithScene(scene);
+	// Start first scene
+	SceneManager::Instance().StartInitialScene();
 
     return true;
 }

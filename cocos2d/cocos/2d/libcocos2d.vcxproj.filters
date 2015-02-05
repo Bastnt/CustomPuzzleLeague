@@ -1304,6 +1304,12 @@
     <ClCompile Include="..\base\JoystickManager.cpp">
       <Filter>base\gamepad</Filter>
     </ClCompile>
+    <ClCompile Include="..\base\RepetitionClock.cpp">
+      <Filter>base\gamepad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\JoystickAxe.cpp">
+      <Filter>base\gamepad</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\physics\CCPhysicsBody.h">
@@ -2530,6 +2536,12 @@
       <Filter>base\gamepad</Filter>
     </ClInclude>
     <ClInclude Include="..\base\JoystickManager.h">
+      <Filter>base\gamepad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\RepetitionClock.h">
+      <Filter>base\gamepad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\JoystickAxe.h">
       <Filter>base\gamepad</Filter>
     </ClInclude>
   </ItemGroup>

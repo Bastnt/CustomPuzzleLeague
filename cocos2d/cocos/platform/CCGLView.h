@@ -125,8 +125,6 @@ public:
 
     virtual void pollEvents();
 
-	
-	virtual void pollJoystickEvent(int id) = 0;
 
     /**
      * Get the frame size of EGL view.
