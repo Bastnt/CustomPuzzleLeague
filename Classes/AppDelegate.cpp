@@ -1,5 +1,4 @@
 #include "AppDelegate.h"
-#include "HelloWorldScene.h"
 
 #include "scene_manager.h"
 #include "theme_manager.h"
