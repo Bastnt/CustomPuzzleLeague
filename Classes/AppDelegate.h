@@ -2,14 +2,16 @@
 #define  _APP_DELEGATE_H_
 
 #include "cocos2d.h"
+#include "gamepad_manager.h"
 
 /**
 @brief    The cocos2d Application.
 
 The reason for implement as private inheritance is to hide some interface call by Director.
 */
-class  AppDelegate : private cocos2d::Application
+class AppDelegate : private cocos2d::Application
 {
+	std::unique_ptr<GamepadManager> gamepad_manager;
 public:
     AppDelegate();
     virtual ~AppDelegate();

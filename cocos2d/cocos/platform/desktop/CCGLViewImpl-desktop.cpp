@@ -355,6 +355,9 @@ bool GLViewImpl::initWithRect(const std::string& viewName, Rect rect, float fram
     glfwWindowHint(GLFW_DEPTH_BITS,_glContextAttrs.depthBits);
     glfwWindowHint(GLFW_STENCIL_BITS,_glContextAttrs.stencilBits);
 
+	//Test
+	glfwWindowHint(GLFW_DECORATED, GL_FALSE);
+
     _mainWindow = glfwCreateWindow(rect.size.width * _frameZoomFactor,
                                    rect.size.height * _frameZoomFactor,
                                    _viewName.c_str(),
@@ -456,34 +459,6 @@ void GLViewImpl::pollEvents()
 {
     glfwPollEvents();
 	JoystickManager::Instance().PollEvents();
-	pollJoystickEvent(GLFW_JOYSTICK_1);
-	pollJoystickEvent(GLFW_JOYSTICK_2);
-	pollJoystickEvent(GLFW_JOYSTICK_3);
-	pollJoystickEvent(GLFW_JOYSTICK_4);
-	pollJoystickEvent(GLFW_JOYSTICK_5);
-	pollJoystickEvent(GLFW_JOYSTICK_6);
-	pollJoystickEvent(GLFW_JOYSTICK_7);
-	pollJoystickEvent(GLFW_JOYSTICK_8);
-}
-
-void GLViewImpl::pollJoystickEvent(int id)
-{
-    /*int count = 0;
-    bool isPresent = glfwJoystickPresent(id);
-    if( isPresent )
-    {
-		EventJoystick event;
-        event.setPresent(true);
-        event.setId(id);
-        const char* name = glfwGetJoystickName(id);
-        event.setName(name);
-        const unsigned char* values = glfwGetJoystickButtons(id, &count);
-        event.setButtonValues(count, values);
-        // ps3: left: x,y right:x,y x (left)-1<=x<=1(right) (up)-1<=y<=1(down)
-        const float* axes = glfwGetJoystickAxes(id, &count);
-        event.setAxes(count, axes);
-		Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
-    }*/
 }
 
 void GLViewImpl::enableRetina(bool enabled)

@@ -90,8 +90,6 @@ public:
      */
     void setFrameZoomFactor(float zoomFactor);
 
-	void pollJoystickEvent(int id);
-
     /** Retina support is disabled by default
      *  @note This method is only available on Mac.
      */

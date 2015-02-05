@@ -2,18 +2,14 @@
 
 #include <base/EventListenerJoystick.h>
 #include <base/EventJoystick.h>
-#include <base/Joystick.h>
 #include <base/CCEventDispatcher.h>
 #include <base/CCDirector.h>
 #include <base/JoystickManager.h>
 
 #include "event_gamepad.h"
 
-bool GamepadManager::init()
+GamepadManager::GamepadManager()
 {
-	if(!Node::init())
-		return false;
-
 	//Initializes gamepads from existing joysticks
 	for(std::size_t i = 0U; i < 16U; ++i)
 	{
@@ -125,14 +121,9 @@ bool GamepadManager::init()
 		}
 	};
 
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-	
-    _eventDispatcher->resumeEventListenersForTarget(this);//Ensures that will listen to JoystickEvent even while app is initializing
-
-	return true;
+	//Highest priority
+    cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(listener, 1);
 }
-
-GamepadManager::GamepadManager() {}
 
 std::unique_ptr<Gamepad> GamepadManager::ConstructDefaultGamepad(cocos2d::Joystick& joy)
 {

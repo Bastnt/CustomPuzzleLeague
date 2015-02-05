@@ -13,13 +13,16 @@
     <Filter Include="src\gamepad">
       <UniqueIdentifier>{138e5e59-14a3-4fe7-9550-caf705a02e59}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\scenes">
+      <UniqueIdentifier>{d4f4135c-e989-49e8-b928-a4a669d1267a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine">
+      <UniqueIdentifier>{9eef4c0f-a1d2-4122-9939-d0a1f6587478}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
       <Filter>src</Filter>
@@ -36,13 +39,25 @@
     <ClCompile Include="..\Classes\gamepad.cpp">
       <Filter>src\gamepad</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\theme_manager.cpp">
+      <Filter>src\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\scene_manager.cpp">
+      <Filter>src\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\start_screen.cpp">
+      <Filter>src\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\start_screen.h">
+      <Filter>src\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>src\engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>src</Filter>
@@ -58,6 +73,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\gamepad.h">
       <Filter>src\gamepad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\theme_manager.h">
+      <Filter>src\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\scene_manager.h">
+      <Filter>src\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>src\engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

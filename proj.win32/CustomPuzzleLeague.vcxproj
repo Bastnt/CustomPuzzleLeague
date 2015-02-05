@@ -143,6 +143,10 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\event_gamepad.cpp" />
     <ClCompile Include="..\Classes\event_listener_gamepad.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\scene_manager.cpp" />
+    <ClCompile Include="..\Classes\start_screen.cpp" />
+    <ClCompile Include="..\Classes\start_screen.h" />
+    <ClCompile Include="..\Classes\theme_manager.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +156,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\event_gamepad.h" />
     <ClInclude Include="..\Classes\event_listener_gamepad.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\scene_manager.h" />
+    <ClInclude Include="..\Classes\theme_manager.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
