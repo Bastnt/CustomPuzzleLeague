@@ -6,7 +6,7 @@
 std::unique_ptr<SceneManager> SceneManager::instance_ = nullptr;
 
 void SceneManager::Init() {
-	SceneManager::instance_ = std::make_unique<SceneManager>();
+	SceneManager::instance_.reset(new SceneManager());
 }
 
 void SceneManager::Kill() {

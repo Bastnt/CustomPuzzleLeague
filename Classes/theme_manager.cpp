@@ -3,7 +3,7 @@
 std::unique_ptr<ThemeManager> ThemeManager::instance_ = nullptr;
 
 void ThemeManager::Init() {
-	ThemeManager::instance_ = std::make_unique<ThemeManager>();
+	ThemeManager::instance_.reset(new ThemeManager());
 }
 
 void ThemeManager::Kill() {
