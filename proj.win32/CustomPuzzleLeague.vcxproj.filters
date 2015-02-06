@@ -19,6 +19,9 @@
     <Filter Include="src\engine">
       <UniqueIdentifier>{9eef4c0f-a1d2-4122-9939-d0a1f6587478}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\model">
+      <UniqueIdentifier>{9df35b82-84fe-48c1-90e2-a6cdc0c29b35}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,12 +45,6 @@
     <ClCompile Include="..\Classes\scene_manager.cpp">
       <Filter>src\engine</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\start_screen.cpp">
-      <Filter>src\scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\start_screen.h">
-      <Filter>src\scenes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\random_generator.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -63,8 +60,26 @@
     <ClCompile Include="..\Classes\session_scene.cpp">
       <Filter>src\scenes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\main_menu.cpp">
+    <ClCompile Include="..\Classes\lobby_scene.cpp">
       <Filter>src\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\main_menu_scene.cpp">
+      <Filter>src\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\player.cpp">
+      <Filter>src\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\profile_manager.cpp">
+      <Filter>src\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\profile.cpp">
+      <Filter>src\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\start_scene.cpp">
+      <Filter>src\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\character.cpp">
+      <Filter>src\model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,14 +119,32 @@
     <ClInclude Include="..\Classes\session_scene.h">
       <Filter>src\scenes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\main_menu.h">
-      <Filter>src\scenes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\scene_id.h">
       <Filter>src\engine</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\transition_policy.h">
       <Filter>src\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lobby_scene.h">
+      <Filter>src\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\main_menu_scene.h">
+      <Filter>src\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\player.h">
+      <Filter>src\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\profile_manager.h">
+      <Filter>src\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\profile.h">
+      <Filter>src\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\start_scene.h">
+      <Filter>src\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\character.h">
+      <Filter>src\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

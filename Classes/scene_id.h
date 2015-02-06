@@ -3,8 +3,9 @@
 
 enum class SceneId
 {
-	START_SCREEN,
+	START,
 	MAIN_MENU,
+	LOBBY,
 	__MAX_VALUE__,
 };
 

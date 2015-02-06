@@ -1,5 +1,5 @@
-#ifndef __MAIN_MENU_H__
-#define __MAIN_MENU_H__
+#ifndef __MAIN_MENU_SCENE_H_CPL__
+#define __MAIN_MENU_SCENE_H_CPL__
 
 #include <2d\CCLayer.h>
 #include <2d\CCScene.h>
@@ -7,7 +7,7 @@
 
 #include <vector>
 
-class MainMenu : public cocos2d::Layer
+class MainMenuScene : public cocos2d::Layer
 {
 	enum class State : uint8_t
 	{
@@ -30,7 +30,7 @@ public:
 
 	virtual bool init() override;
 
-	CREATE_FUNC(MainMenu);
+	CREATE_FUNC(MainMenuScene);
 };
 
 #endif

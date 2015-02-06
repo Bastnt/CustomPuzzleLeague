@@ -1,4 +1,4 @@
-#include "start_screen.h"
+#include "start_scene.h"
 #include <2d\CCSprite.h>
 #include <base\CCEventDispatcher.h>
 
@@ -8,22 +8,22 @@
 #include "theme_manager.h"
 #include "scene_manager.h"
 
-cocos2d::Scene* StartScreen::createScene()
+cocos2d::Scene* StartScene::createScene()
 {
 	auto scene = cocos2d::Scene::create();
-	auto layer = StartScreen::create();
+	auto layer = StartScene::create();
 	scene->addChild(layer);
 	return scene;
 }
 
-bool StartScreen::init()
+bool StartScene::init()
 {
 	if (!Layer::init())
 	{
 		return false;
 	}
 
-	ThemeManager::Instance().AddElementsToNode("start_screen", dynamic_cast<cocos2d::Node*>(this));
+	ThemeManager::Instance().AddElementsToNode("start", dynamic_cast<cocos2d::Node*>(this));
 
 	auto listener = EventListenerGamepad::create();
 	listener->onPressed = [] (EventInputGamepad* event)

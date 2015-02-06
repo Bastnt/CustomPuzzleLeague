@@ -6,7 +6,6 @@
 
 #include <vector>
 #include <memory>
-#include "start_screen.h"
 #include "scene_id.h"
 #include "transition_policy.h"
 

@@ -1,5 +1,5 @@
 {
-    "start_screen": {
+    "start": {
         "sprites": [    { "path": "bg.jpg", "anchor": [0, 0], "z_index": 1 },
                         { "path": "start_screen/press_start.png", "position": [960, 340], "z_index": 2 } ]
     },

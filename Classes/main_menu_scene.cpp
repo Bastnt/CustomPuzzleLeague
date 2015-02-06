@@ -1,4 +1,4 @@
-#include "main_menu.h"
+#include "main_menu_scene.h"
 #include <2d\CCSprite.h>
 
 #include <base\CCEventDispatcher.h>
@@ -8,15 +8,15 @@
 #include "scene_manager.h"
 
 
-cocos2d::Scene* MainMenu::createScene()
+cocos2d::Scene* MainMenuScene::createScene()
 {
 	auto scene = cocos2d::Scene::create();
-	auto layer = MainMenu::create();
+	auto layer = MainMenuScene::create();
 	scene->addChild(layer);
 	return scene;
 }
 
-bool MainMenu::init()
+bool MainMenuScene::init()
 {
 	if (!Layer::init())
 	{
@@ -62,7 +62,7 @@ bool MainMenu::init()
 		}
 		else if(input == EventInputGamepad::Input::CANCEL_SWAP)
 		{
-			SceneManager::Instance().ChangeScene(SceneId::START_SCREEN, TransitionPolicy::SLIDE_IN_L);
+			SceneManager::Instance().ChangeScene(SceneId::START, TransitionPolicy::SLIDE_IN_L);
 		}
 	};
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
@@ -72,7 +72,7 @@ bool MainMenu::init()
 	return true;
 }
 
-void MainMenu::ChangeState(State state)
+void MainMenuScene::ChangeState(State state)
 {
 	current_state_ = state;
 	cocos2d::Node* state_node = menu_items_[static_cast<std::size_t>(current_state_)];
@@ -81,7 +81,7 @@ void MainMenu::ChangeState(State state)
 }
 
 
-void MainMenu::BuildMenuItem(const std::string& name, DefaultItemId id, uint32_t z_index)
+void MainMenuScene::BuildMenuItem(const std::string& name, DefaultItemId id, uint32_t z_index)
 {
 	cocos2d::Node* node = getChildByName(name);
 	if(node)
