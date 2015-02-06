@@ -6,6 +6,7 @@
 #include "event_gamepad.h"
 
 #include "theme_manager.h"
+#include "scene_manager.h"
 
 cocos2d::Scene* StartScreen::createScene()
 {
@@ -27,11 +28,9 @@ bool StartScreen::init()
 	auto listener = EventListenerGamepad::create();
 	listener->onPressed = [] (EventInputGamepad* event)
 	{
-		if(event->getInput() == EventInputGamepad::Input::VALIDATION_PAUSE)
+		if(event->getInput() == EventInputGamepad::Input::VALIDATION_PAUSE || event->getInput()  == EventInputGamepad::Input::VALIDATION_SWAP)
 		{
-#ifdef _DEBUG
-		cocos2d::log("Pressed start!");
-#endif
+			SceneManager::Instance().ChangeScene(SceneId::MAIN_MENU);
 		}
 	};
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
