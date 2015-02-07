@@ -21,6 +21,7 @@
     </Filter>
     <Filter Include="src\utils">
       <UniqueIdentifier>{e5f22950-184e-4601-8ee6-0f77f6467c46}</UniqueIdentifier>
+  	</Filter>
     <Filter Include="src\model">
       <UniqueIdentifier>{9df35b82-84fe-48c1-90e2-a6cdc0c29b35}</UniqueIdentifier>
     </Filter>
@@ -67,6 +68,7 @@
     </ClCompile>
     <ClCompile Include="..\Classes\random_generator.cpp">
       <Filter>src\utils</Filter>
+  	</ClCompile>
     <ClCompile Include="..\Classes\lobby_scene.cpp">
       <Filter>src\scenes</Filter>
     </ClCompile>
@@ -125,6 +127,7 @@
     </ClInclude>
     <ClInclude Include="..\Classes\random_generator.h">
       <Filter>src\utils</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\scene_id.h">
       <Filter>src\engine</Filter>
     </ClInclude>
