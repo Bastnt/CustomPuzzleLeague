@@ -11,6 +11,11 @@ public:
 	short const height;
 	short const real_height;
 	unsigned char const max_color;
+	float time_step;
+	float falling_time;
+	float dying_time;
+	float swap_time;
+	float hanging_time;
 
 	Session();
 };

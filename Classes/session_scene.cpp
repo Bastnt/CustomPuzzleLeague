@@ -5,12 +5,13 @@
 #include "base\CCEventDispatcher.h"
 
 #include "session_scene.h"
+#include "board.h"
+#include "event_listener_gamepad.h"
+#include "event_gamepad.h"
 
 USING_NS_CC;
 
-SessionScene::SessionScene() : model(config) {
-
-}
+SessionScene::SessionScene() {}
 
 Scene* SessionScene::createScene()
 {
@@ -40,40 +41,76 @@ bool SessionScene::init()
 	auto director = Director::getInstance();
 	auto window_size = director->getVisibleSize();
 
-	model.AddLine(Matrix::Fill::RANDOMLY);
-	model.AddLine(Matrix::Fill::RANDOMLY);
-	model.AddLine(Matrix::Fill::RANDOMLY);
-	model.AddLine(Matrix::Fill::RANDOMLY);
 
-	auto matrix = Board::create(model, { window_size.height*config.width / config.height, window_size.height - 2 * config.margin });
-	matrix->setPosition({ window_size.width / 2.f, window_size.height / 2.f });
-	matrix->setAnchorPoint({ .5f, .5f });
 
-	addChild(matrix);
+	auto board = Board::create(config, { window_size.height*config.width / config.height, window_size.height - 2 * config.margin });
+
+	board->AddLine(Board::Fill::RANDOMLY);
+	board->AddLine(Board::Fill::RANDOMLY);
+	board->AddLine(Board::Fill::RANDOMLY);
+	board->AddLine(Board::Fill::RANDOMLY);
+	
+	board->setPosition({ window_size.width / 2.f, window_size.height / 2.f });
+	board->setAnchorPoint({ .5f, .5f });
+
+	addChild(board);
 
 	auto listener = EventListenerKeyboard::create();
 
-	listener->onKeyPressed = [matrix](EventKeyboard::KeyCode keyCode, Event* event)
+	auto listener2 = EventListenerGamepad::create();
+	listener2->onPressed = [board](EventInputGamepad* event)
+	{
+		switch (event->getInput()) {
+		case EventInputGamepad::Input::UP:
+			board->MoveCursor(Board::Direction::UP);
+			break;
+		case EventInputGamepad::Input::DOWN:
+			board->MoveCursor(Board::Direction::DOWN);
+			break;
+		case EventInputGamepad::Input::RIGHT:
+			board->MoveCursor(Board::Direction::RIGHT);
+			break;
+		case EventInputGamepad::Input::LEFT:
+			board->MoveCursor(Board::Direction::LEFT);
+			break;
+		case EventInputGamepad::Input::VALIDATION_SWAP:
+			board->Swap();
+			break;
+		case EventInputGamepad::Input::SCROLL:
+			board->Scroll();
+			break;
+		default:
+			break;
+		}
+	};
+
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener2, this);
+
+
+	listener->onKeyPressed = [board, director](EventKeyboard::KeyCode keyCode, Event* event)
 	{
 		log("Key with keycode %d pressed", keyCode);
 		switch (keyCode) {
 		case EventKeyboard::KeyCode::KEY_UP_ARROW:
-			matrix->MoveCursor(Board::Direction::UP);
+			board->MoveCursor(Board::Direction::UP);
 			break;
 		case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-			matrix->MoveCursor(Board::Direction::DOWN);
+			board->MoveCursor(Board::Direction::DOWN);
 			break;
 		case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-			matrix->MoveCursor(Board::Direction::RIGHT);
+			board->MoveCursor(Board::Direction::RIGHT);
 			break;
 		case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-			matrix->MoveCursor(Board::Direction::LEFT);
+			board->MoveCursor(Board::Direction::LEFT);
 			break;
 		case EventKeyboard::KeyCode::KEY_SPACE:
-			matrix->Swap();
+			board->Swap();
 			break;
 		case EventKeyboard::KeyCode::KEY_CTRL:
-			matrix->Scroll();
+			board->Scroll();
+			break;
+		case EventKeyboard::KeyCode::KEY_ESCAPE:
+			director->end();
 			break;
 		default:
 			break;

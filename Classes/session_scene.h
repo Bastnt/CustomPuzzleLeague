@@ -4,7 +4,6 @@
 #include "2d\CCLayer.h"
 #include "2d\CCScene.h"
 
-#include "board.h"
 #include "session.h"
 
 class SessionScene : public cocos2d::Layer
@@ -19,7 +18,6 @@ public:
 	Session config;
 
 private:
-	Matrix model;
 	SessionScene();
 	static float BLOCK_SIZE_;
 };

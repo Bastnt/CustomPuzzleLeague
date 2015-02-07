@@ -19,6 +19,9 @@
     <Filter Include="src\engine">
       <UniqueIdentifier>{9eef4c0f-a1d2-4122-9939-d0a1f6587478}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\utils">
+      <UniqueIdentifier>{e5f22950-184e-4601-8ee6-0f77f6467c46}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -48,9 +51,6 @@
     <ClCompile Include="..\Classes\start_screen.h">
       <Filter>src\scenes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\random_generator.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\app_delegate.cpp">
       <Filter>src\engine</Filter>
     </ClCompile>
@@ -62,6 +62,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\session_scene.cpp">
       <Filter>src\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\random_generator.cpp">
+      <Filter>src\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,9 +89,6 @@
     <ClInclude Include="..\Classes\scene_manager.h">
       <Filter>src\engine</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\random_generator.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\app_delegate.h">
       <Filter>src\engine</Filter>
     </ClInclude>
@@ -100,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\session_scene.h">
       <Filter>src\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\random_generator.h">
+      <Filter>src\utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

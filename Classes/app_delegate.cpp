@@ -28,8 +28,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-		//glview = GLViewImpl::create("Custom Puzzle League");
-		glview = GLViewImpl::createWithFullScreen("Custom Puzzle League");
+		glview = GLViewImpl::create("Custom Puzzle League");
+		//glview = GLViewImpl::createWithFullScreen("Custom Puzzle League");
         director->setOpenGLView(glview);
     }
 
@@ -37,6 +37,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setDisplayStats(true);
 
     glview->setDesignResolutionSize(1920, 1080, ResolutionPolicy::SHOW_ALL);//intern
+	glview->setFrameSize(800, 450);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1. / 60.);
