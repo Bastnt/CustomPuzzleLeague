@@ -7,6 +7,9 @@
 
 #include "scene_manager.h"
 
+//Test ONLY
+#include "profile_manager.h"
+
 
 cocos2d::Scene* MainMenuScene::createScene()
 {
@@ -54,7 +57,6 @@ bool MainMenuScene::init()
 		}
 		else if(input == EventInputGamepad::Input::UP)
 		{
-			State next;
 			if(static_cast<uint8_t>(current_state_) == 0U)
 				ChangeState(static_cast<State>(static_cast<uint8_t>(State::__MAX_VALUE__)-1U));
 			else
@@ -68,7 +70,9 @@ bool MainMenuScene::init()
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	ChangeState(State::SOLO);
-	
+
+	ProfileManager::Instance().SaveProfiles();
+
 	return true;
 }
 

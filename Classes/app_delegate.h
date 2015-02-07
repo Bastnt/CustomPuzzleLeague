@@ -36,6 +36,9 @@ public:
     @param  the pointer of the application
     */
     virtual void applicationWillEnterForeground();
+
+	//Called by main menu scene on exiting the app
+	static void applicationWillClose();
 };
 
 #endif // _APP_DELEGATE_H_

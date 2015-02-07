@@ -7,6 +7,10 @@
 #include "lobby_scene.h"
 #include "session_scene.h"
 
+
+/////////FOR TESTS ONLY
+#include "profile.h"
+
 std::unique_ptr<SceneManager> SceneManager::instance_ = nullptr;
 
 void SceneManager::Init() 

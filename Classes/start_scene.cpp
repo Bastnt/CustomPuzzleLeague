@@ -2,6 +2,7 @@
 #include <2d\CCSprite.h>
 #include <base\CCEventDispatcher.h>
 
+#include "app_delegate.h"
 #include "event_listener_gamepad.h"
 #include "event_gamepad.h"
 
@@ -28,9 +29,15 @@ bool StartScene::init()
 	auto listener = EventListenerGamepad::create();
 	listener->onPressed = [] (EventInputGamepad* event)
 	{
-		if(event->getInput() == EventInputGamepad::Input::VALIDATION_PAUSE || event->getInput()  == EventInputGamepad::Input::VALIDATION_SWAP)
+		auto input = event->getInput();
+		if(input == EventInputGamepad::Input::VALIDATION_PAUSE || input == EventInputGamepad::Input::VALIDATION_SWAP)
 		{
 			SceneManager::Instance().ChangeScene(SceneId::MAIN_MENU);
+		}
+		else if(input == EventInputGamepad::Input::CANCEL_SWAP)
+		{
+			//Exit the applications
+			AppDelegate::applicationWillClose();
 		}
 	};
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
