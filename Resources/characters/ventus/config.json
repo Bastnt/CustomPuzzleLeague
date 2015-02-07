@@ -1,0 +1,22 @@
+{
+    "name": "Ventus",
+    "description": "A windy hero from Kingdom Hearts: Birth by Sleep.",
+
+    "chains": {
+        "2": [ "chains/0.wav" ],
+        "4": [ "chains/1.wav" ],
+        "6": [ "chains/2.wav" ],
+        "8": [ "chains/3.wav" ],
+        "10": [ "chains/4.wav" ]
+    },
+    "combos": {
+        "4": [ "combos/0.wav", "combos/1.wav", "combos/2.wav", "combos/3.wav", "combos/4.wav", "combos/5.wav", "combos/6.wav" ],
+    },
+    "selection": [ "selection/0.ogg", "selection/1.ogg", "selection/2.ogg" ],
+    "taunt": [ "taunt/0.ogg", "taunt/1.ogg" ],
+    "win": [ "win/0.ogg" ],
+
+    "game_background": [ "game_background/0.png" ],
+    "character": "ventus.png",
+    "character_icon": "ventus_icon.png",
+}
