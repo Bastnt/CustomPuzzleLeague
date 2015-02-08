@@ -83,7 +83,7 @@ bool ProfileManager::LoadProfile(Profile& profile, const NodeValue& json)
 	
 	if(json.HasMember("last_use") && json["last_use"].IsUint64())
 	{
-		std::time_t c_last_use = json["pseudo"].GetUint64();
+		std::time_t c_last_use = static_cast<std::time_t>(json["last_use"].GetUint64());
 		profile.last_use =std::chrono::steady_clock::from_time_t(std::move(c_last_use));
 	}
 	else

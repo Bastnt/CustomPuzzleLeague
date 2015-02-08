@@ -15,5 +15,8 @@
     "player_lobby_start": {
         "sprites": [    { "path": "player_lobby/bg_lobby.jpg", "anchor": [0, 0], "z_index": 1 },
                         { "path": "player_lobby/press_start.png", "position": [480, 540], "z_index": 2 } ]
+    },
+    "player_lobby_profile": {
+        "sprites": [    { "path": "player_lobby/bg_lobby.jpg", "anchor": [0, 0], "z_index": 1 } ]
     }
 }

@@ -37,7 +37,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // turn on display FPS
     director->setDisplayStats(true);
 	
-	glview->setFrameSize(800,450);//windows
+	//glview->setFrameSize(800,450);//windows
     glview->setDesignResolutionSize(1920, 1080, ResolutionPolicy::SHOW_ALL);//intern
 
     // set FPS. the default value is 1.0/60 if you don't call this
@@ -48,9 +48,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	SceneManager::Init();
 	ThemeManager::Init();
 	ProfileManager::Init();
-	//ProfileManager::Instance().LoadProfiles();
-
-	//LOAD PROFILES SEEMS TO BE BUGGING
+	ProfileManager::Instance().LoadProfiles();
 
 	// Start first scene
 	SceneManager::Instance().StartInitialScene();
