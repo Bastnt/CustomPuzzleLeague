@@ -8,5 +8,15 @@
         "labels": [    	{ "path": "main_menu/pixel.fnt", "value": "SOLO", "name": "solo", "position": [960, 780], "z_index": 2 },
         				{ "path": "main_menu/pixel.fnt", "value": "MULTIPLAYER", "name": "multi", "position": [960, 540], "z_index": 2 },
         				{ "path": "main_menu/pixel.fnt", "value": "OPTIONS", "name": "options", "position": [960, 300], "z_index": 2 } ]
+    },
+    "lobby_scene": {
+        "sprites": [    { "path": "bg.jpg", "anchor": [0, 0], "z_index": 1 } ]
+    },
+    "player_lobby_start": {
+        "sprites": [    { "path": "player_lobby/bg_lobby.jpg", "anchor": [0, 0], "z_index": 1 },
+                        { "path": "player_lobby/press_start.png", "position": [480, 540], "z_index": 2 } ]
+    },
+    "player_lobby_profile": {
+        "sprites": [    { "path": "player_lobby/bg_lobby.jpg", "anchor": [0, 0], "z_index": 1 } ]
     }
 }

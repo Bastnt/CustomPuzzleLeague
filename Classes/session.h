@@ -2,10 +2,14 @@
 #define __GAME_CONFIG_H__
 
 #include <stdint.h>
+#include <vector>
+#include <memory>
+
+#include "player.h"
 
 class Session {
 public:
-	float const margin;
+	float margin;
 
 	// ====== Configurable members ======
 
@@ -45,6 +49,9 @@ public:
 	uint32_t creep_division_steps;
 	// Number of creep moves between newline generation
 	uint32_t newline_generation_creep_moves;
+
+	std::vector<std::shared_ptr<Player> > players;
+
 };
 
 #endif

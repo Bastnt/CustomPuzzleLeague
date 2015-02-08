@@ -355,8 +355,8 @@ bool GLViewImpl::initWithRect(const std::string& viewName, Rect rect, float fram
     glfwWindowHint(GLFW_DEPTH_BITS,_glContextAttrs.depthBits);
     glfwWindowHint(GLFW_STENCIL_BITS,_glContextAttrs.stencilBits);
 
-	//Test
-	glfwWindowHint(GLFW_DECORATED, GL_FALSE);
+	//Unbordering
+	//glfwWindowHint(GLFW_DECORATED, GL_FALSE);
 
     _mainWindow = glfwCreateWindow(rect.size.width * _frameZoomFactor,
                                    rect.size.height * _frameZoomFactor,

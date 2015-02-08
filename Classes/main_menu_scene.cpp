@@ -7,6 +7,9 @@
 
 #include "scene_manager.h"
 
+//Test ONLY
+#include "profile_manager.h"
+
 
 cocos2d::Scene* MainMenuScene::createScene()
 {
@@ -54,7 +57,6 @@ bool MainMenuScene::init()
 		}
 		else if(input == EventInputGamepad::Input::UP)
 		{
-			State next;
 			if(static_cast<uint8_t>(current_state_) == 0U)
 				ChangeState(static_cast<State>(static_cast<uint8_t>(State::__MAX_VALUE__)-1U));
 			else
@@ -64,15 +66,29 @@ bool MainMenuScene::init()
 		{
 			SceneManager::Instance().ChangeScene(SceneId::START, TransitionPolicy::SLIDE_IN_L);
 		}
-		else if (input == EventInputGamepad::Input::VALIDATION_SWAP && current_state_ == State::SOLO)
+		else if(input == EventInputGamepad::Input::VALIDATION_SWAP)
 		{
-			SceneManager::Instance().ChangeScene(SceneId::SOLO);
+			switch (current_state_)
+			{
+			case MainMenuScene::State::SOLO:
+				SceneManager::Instance().ChangeScene(SceneId::SOLO);
+				break;
+			case MainMenuScene::State::MULTIPLAYER:
+				SceneManager::Instance().ChangeScene(SceneId::LOBBY, TransitionPolicy::SLIDE_IN_R);
+				break;
+			case MainMenuScene::State::OPTIONS:
+				break;
+			default:
+				break;
+			}
 		}
 	};
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	ChangeState(State::SOLO);
-	
+
+	ProfileManager::Instance().SaveProfiles();
+
 	return true;
 }
 

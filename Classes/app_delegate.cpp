@@ -1,6 +1,7 @@
 #include "app_delegate.h"
 #include "scene_manager.h"
 #include "theme_manager.h"
+#include "profile_manager.h"
 
 USING_NS_CC;
 
@@ -35,17 +36,19 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // turn on display FPS
     director->setDisplayStats(true);
-
+	
+	//glview->setFrameSize(800,450);//windows
     glview->setDesignResolutionSize(1920, 1080, ResolutionPolicy::SHOW_ALL);//intern
-	glview->setFrameSize(800, 450);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1. / 60.);
 
 	//Creates instances
-	gamepad_manager =  std::make_unique<GamepadManager>();
+	gamepad_manager = std::make_unique<GamepadManager>();
 	SceneManager::Init();
 	ThemeManager::Init();
+	ProfileManager::Init();
+	ProfileManager::Instance().LoadProfiles();
 
 	// Start first scene
 	SceneManager::Instance().StartInitialScene();
@@ -67,4 +70,15 @@ void AppDelegate::applicationWillEnterForeground() {
 
     // if you use SimpleAudioEngine, it must resume here
     // SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+}
+
+// this method will be called when exiting the application with Exit from the main_menu
+void AppDelegate::applicationWillClose() {
+	ProfileManager::Instance().SaveProfiles();
+
+    Director::getInstance()->end();
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    exit(0);
+#endif
 }

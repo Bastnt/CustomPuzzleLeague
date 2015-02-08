@@ -23,4 +23,5 @@ ground_height(1)
 
 void Session::UpdateConstants() {
 	creep_division_steps = creep_shift_time / block_division;
+	players.reserve(16u);
 }

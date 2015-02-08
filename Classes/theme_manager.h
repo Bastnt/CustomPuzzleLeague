@@ -4,11 +4,13 @@
 #include <cocos2d\external\json\document.h>
 #include <2d\CCNode.h>
 
+#include <functional>
 #include <memory>
 #include <string>
 #include <map>
 
 #include "character.h"
+#include "block_theme.h"
 
 enum DefaultItemId
 {
@@ -38,12 +40,17 @@ class ThemeManager
 	static void AddElementToNode(const NodeValue& node_json, cocos2d::Node* to_add, cocos2d::Node* node);
 
 	//The loaded characters 
-	std::map<std::string, Character> characters_;
-	//Load a character
-	static void LoadCharacter(const rapidjson::Document& chara_json, Character& chara);
-	//Submethods of LoadCharacter method
+	std::map<std::string, std::shared_ptr<Character> > characters_;
+	//The loaded block themes
+	std::map<std::string, std::shared_ptr<BlockTheme> > block_themes_;
+
+	//Submethods for parsing
 	static void LoadSharedSounds(std::vector<SharedSounds>& to_be_filled, std::size_t max_size,  const char* to_parse, const rapidjson::Document& json);
 	static void LoadVectorString(std::vector<std::string>& to_be_filled, const NodeValue& parsed);
+	
+	//Loading method for character, block themes, etc.
+	template <class T>
+	static void LoadMapItems(std::map<std::string, std::shared_ptr<T> >& to_be_filled, std::string subfolder_name, std::function<void (const rapidjson::Document&, T&)> loading_method);
 public:
 	//Initializes the instance
 	static void Init();
@@ -57,6 +64,8 @@ public:
 	
 	//Load the characters from folders
 	void LoadCharacters();
+	//Load the block themes from folders
+	void LoadBlockThemes();
 
 	//Add children to the provided node based on the name
 	void AddElementsToNode(const std::string& scene_name, cocos2d::Node* node);

@@ -146,105 +146,6 @@ std::string ThemeManager::GetDefaultPath(DefaultItemId id)
 	}
 }
 
-
-void ThemeManager::LoadCharacters()
-{
-	characters_.clear();
-
-	auto file_util = cocos2d::FileUtils::getInstance();
-
-	std::string fullPath = file_util->fullPathForFilename("characters/config.json");
-    std::string json = file_util->getStringFromFile(fullPath);
-	rapidjson::Document characters_array;
-	characters_array.Parse<0>(json.c_str());
-	std::string folder_name { "" };
-	if(characters_array.IsArray())
-	{
-		for(rapidjson::SizeType i = 0U, end_i = characters_array.Size(); i < end_i; ++i)
-		{
-			folder_name = characters_array[i].GetString();
-			if(file_util->isDirectoryExist("characters/"+folder_name) && file_util->isFileExist("characters/"+folder_name+"/config.json"))
-			{
-				std::string json = file_util->getStringFromFile(file_util->fullPathForFilename("characters/"+folder_name+"/config.json"));
-				rapidjson::Document character_json;
-				character_json.Parse<0>(json.c_str());
-				if(character_json.IsObject() && character_json.HasMember("name") && character_json["name"].GetString() != "")
-				{
-					std::string chara_name { character_json["name"].GetString() };
-					if(characters_.count(chara_name)==0)
-					{
-						Character chara { chara_name };
-						LoadCharacter(character_json, chara);
-						characters_[chara_name] = std::move(chara);
-					}
-					else
-					{
-						cocos2d::log("Ignored loading of character '%s' from folder '%s', its name is already used.", chara_name.c_str(), folder_name.c_str());
-					}
-				}
-				else
-				{
-					cocos2d::log("Incorrect data for character '%s', cannot find name in config.json file.", folder_name.c_str());
-				}
-			}
-			else
-			{
-				cocos2d::log("Incorrect data for character '%s', cannot find folder or config.json file.", folder_name.c_str());
-			}
-		}
-	}
-	else
-	{
-		cocos2d::log("Incorrect data or cannot find 'characters/config.json'.");
-	}
-}
-
-
-void ThemeManager::LoadCharacter(const rapidjson::Document& json, Character& chara)
-{
-	//Handles description if any
-	if(json.HasMember("description") && json["description"].IsString())
-		chara.description = json["description"].GetString();
-
-	//Handles sounds for chains
-	ThemeManager::LoadSharedSounds(chara.chains_sounds, 14, "chains", json);
-	
-	//Handles sounds for combos
-	ThemeManager::LoadSharedSounds(chara.combos_sounds, 30, "combos", json);
-	
-	//Handles sounds for selection
-	if(json.HasMember("selection") && json["selection"].IsArray())
-		ThemeManager::LoadVectorString(chara.selection_sounds, json["selection"]);
-
-	//Handles sounds for taunt
-	if(json.HasMember("taunt") && json["taunt"].IsArray())
-		ThemeManager::LoadVectorString(chara.taunt_sounds, json["taunt"]);
-
-	//Handles sounds for win
-	if(json.HasMember("win") && json["win"].IsArray())
-		ThemeManager::LoadVectorString(chara.win_sounds, json["win"]);
-
-	//Handles character icon
-	if(json.HasMember("character_icon") && json["character_icon"].IsString())
-		chara.icon_sprite_path = json["character_icon"].GetString();
-	else
-		chara.icon_sprite_path = ThemeManager::GetDefaultPath(DefaultItemId::CHARACTER_ICON);
-
-	//Handles character main sprite
-	if(json.HasMember("character") && json["character"].IsString())
-		chara.main_sprite_path = json["character"].GetString();
-	else
-		chara.main_sprite_path = ThemeManager::GetDefaultPath(DefaultItemId::CHARACTER_SPRITE);
-
-	//Handles character's game backgrounds
-	if(json.HasMember("game_background") && json["game_background"].IsArray())
-	{
-		ThemeManager::LoadVectorString(chara.game_backgrounds, json["game_background"]);
-	}
-	if(chara.game_backgrounds.empty())
-		chara.game_backgrounds.push_back(ThemeManager::GetDefaultPath(DefaultItemId::CHARACTER_GAME_BACKGROUND));
-}
-
 void ThemeManager::LoadSharedSounds(std::vector<SharedSounds>& to_be_filled, std::size_t max_size, const char* to_parse, const rapidjson::Document& json)
 {
 	to_be_filled.reserve(max_size);
@@ -284,4 +185,118 @@ void ThemeManager::LoadVectorString(std::vector<std::string>& to_be_filled, cons
 		if(parsed[j].IsString())
 			to_be_filled.push_back(parsed[j].GetString());
 	}
+}
+
+template <class T>
+void ThemeManager::LoadMapItems(std::map<std::string, std::shared_ptr<T> >& to_be_filled, std::string subfolder_name, std::function<void (const rapidjson::Document&, T&)> loader)
+{
+	to_be_filled.clear();
+
+	auto file_util = cocos2d::FileUtils::getInstance();
+
+    std::string json = file_util->getStringFromFile(subfolder_name+"/config.json");
+	rapidjson::Document items_array;
+	items_array.Parse<0>(json.c_str());
+	std::string folder_name { "" };
+	if(items_array.IsArray())
+	{
+		for(rapidjson::SizeType i = 0U, end_i = items_array.Size(); i < end_i; ++i)
+		{
+			folder_name = items_array[i].GetString();
+			if(file_util->isDirectoryExist(subfolder_name+folder_name) && file_util->isFileExist(subfolder_name+folder_name+"/config.json"))
+			{
+				std::string json = file_util->getStringFromFile(subfolder_name+folder_name+"/config.json");
+				rapidjson::Document item_json;
+				item_json.Parse<0>(json.c_str());
+				if(item_json.IsObject() && item_json.HasMember("name") && item_json["name"].GetString() != "")
+				{
+					std::string item_name { item_json["name"].GetString() };
+					if(to_be_filled.count(item_name)==0)
+					{
+						std::shared_ptr<T> item = std::make_shared<T>(item_name);
+						loader(item_json, *item);
+						to_be_filled[item_name] = std::move(item);
+					}
+					else
+					{
+						cocos2d::log("Ignored loading of item '%s' from folder '%s', its name is already used.", item_name.c_str(), folder_name.c_str());
+					}
+				}
+				else
+				{
+					cocos2d::log("Incorrect data for '%s', cannot find name in config.json file.", folder_name.c_str());
+				}
+			}
+			else
+			{
+				cocos2d::log("Incorrect data for item '%s', cannot find folder or config.json file.", folder_name.c_str());
+			}
+		}
+	}
+	else
+	{
+		cocos2d::log("Incorrect data or cannot find '%s/config.json'.", subfolder_name);
+	}
+}
+
+void ThemeManager::LoadCharacters()
+{
+	LoadMapItems<Character>(characters_, "characters", [] (const rapidjson::Document& json, Character& chara)
+		{
+			//Handles description if any
+			if(json.HasMember("description") && json["description"].IsString())
+				chara.description = json["description"].GetString();
+
+			//Handles sounds for chains
+			ThemeManager::LoadSharedSounds(chara.chains_sounds, 14, "chains", json);
+	
+			//Handles sounds for combos
+			ThemeManager::LoadSharedSounds(chara.combos_sounds, 30, "combos", json);
+	
+			//Handles sounds for selection
+			if(json.HasMember("selection") && json["selection"].IsArray())
+				ThemeManager::LoadVectorString(chara.selection_sounds, json["selection"]);
+
+			//Handles sounds for taunt
+			if(json.HasMember("taunt") && json["taunt"].IsArray())
+				ThemeManager::LoadVectorString(chara.taunt_sounds, json["taunt"]);
+
+			//Handles sounds for win
+			if(json.HasMember("win") && json["win"].IsArray())
+				ThemeManager::LoadVectorString(chara.win_sounds, json["win"]);
+
+			//Handles character icon
+			if(json.HasMember("character_icon") && json["character_icon"].IsString())
+				chara.icon_sprite_path = json["character_icon"].GetString();
+			else
+				chara.icon_sprite_path = ThemeManager::GetDefaultPath(DefaultItemId::CHARACTER_ICON);
+
+			//Handles character main sprite
+			if(json.HasMember("character") && json["character"].IsString())
+				chara.main_sprite_path = json["character"].GetString();
+			else
+				chara.main_sprite_path = ThemeManager::GetDefaultPath(DefaultItemId::CHARACTER_SPRITE);
+
+			//Handles character's game backgrounds
+			if(json.HasMember("game_background") && json["game_background"].IsArray())
+			{
+				ThemeManager::LoadVectorString(chara.game_backgrounds, json["game_background"]);
+			}
+			if(chara.game_backgrounds.empty())
+				chara.game_backgrounds.push_back(ThemeManager::GetDefaultPath(DefaultItemId::CHARACTER_GAME_BACKGROUND));
+		});
+}
+
+void ThemeManager::LoadBlockThemes()
+{
+	LoadMapItems<BlockTheme>(block_themes_, "blocks", [] (const rapidjson::Document& json, BlockTheme& block_theme)
+		{
+			//Handles blocks sprites
+			if(json.HasMember("living_blocks") && json["living_blocks"].IsArray())
+				ThemeManager::LoadVectorString(block_theme.living_blocks, json["living_blocks"]);
+
+			//Handles cursor sprite
+			if(json.HasMember("cursor") && json["cursor"].IsString())
+				block_theme.cursor = json["cursor"].GetString();
+		});
 }

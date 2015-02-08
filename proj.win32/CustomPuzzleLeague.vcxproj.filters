@@ -90,7 +90,15 @@
     <ClCompile Include="..\Classes\board.cpp">
       <Filter>src\board</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\physic_engine.cpp" />
+    <ClCompile Include="..\Classes\physic_engine.cpp">
+      <Filter>src\board</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\block_theme.cpp">
+      <Filter>src\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\player_lobby.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -159,7 +167,15 @@
     <ClInclude Include="..\Classes\board.h">
       <Filter>src\board</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\physic_engine.h" />
+    <ClInclude Include="..\Classes\physic_engine.h">
+      <Filter>src\board</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\block_theme.h">
+      <Filter>src\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\player_lobby.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
