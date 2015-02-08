@@ -6,6 +6,7 @@ enum class SceneId
 	START,
 	MAIN_MENU,
 	LOBBY,
+	SOLO,
 	__MAX_VALUE__,
 };
 

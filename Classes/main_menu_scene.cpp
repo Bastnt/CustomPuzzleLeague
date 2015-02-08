@@ -64,6 +64,10 @@ bool MainMenuScene::init()
 		{
 			SceneManager::Instance().ChangeScene(SceneId::START, TransitionPolicy::SLIDE_IN_L);
 		}
+		else if (input == EventInputGamepad::Input::VALIDATION_SWAP && current_state_ == State::SOLO)
+		{
+			SceneManager::Instance().ChangeScene(SceneId::SOLO);
+		}
 	};
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 

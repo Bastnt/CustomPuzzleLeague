@@ -139,8 +139,10 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
   <ItemGroup>
     <ClCompile Include="..\Classes\app_delegate.cpp" />
     <ClCompile Include="..\Classes\character.cpp" />
+    <ClCompile Include="..\Classes\block_generator.cpp" />
     <ClCompile Include="..\Classes\lobby_scene.cpp" />
     <ClCompile Include="..\Classes\main_menu_scene.cpp" />
+    <ClCompile Include="..\Classes\physic_engine.cpp" />
     <ClCompile Include="..\Classes\player.cpp" />
     <ClCompile Include="..\Classes\profile.cpp" />
     <ClCompile Include="..\Classes\profile_manager.cpp" />
@@ -160,6 +162,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
   <ItemGroup>
     <ClInclude Include="..\Classes\app_delegate.h" />
     <ClInclude Include="..\Classes\character.h" />
+    <ClInclude Include="..\Classes\block_generator.h" />
+    <ClInclude Include="..\Classes\physic_engine.h" />
     <ClInclude Include="..\Classes\profile.h" />
     <ClInclude Include="..\Classes\lobby_scene.h" />
     <ClInclude Include="..\Classes\main_menu_scene.h" />

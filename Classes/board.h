@@ -7,15 +7,17 @@
 #include <array>
 #include <stdint.h>
 #include <memory>
-
 #include "2d/CCDrawNode.h"
 #include "2d/CCSprite.h"
 #include "2d\CCLabel.h"
+
 #include "session.h"
+#include "block_generator.h"
+#include "physic_engine.h"
 
 class Square {
 public:
-	enum class State : unsigned char { IDLE, HANGING, FALLING, FALLING_END, WAIT, DYING };
+	enum class State : unsigned char { IDLE, HANGING, FALLING, DYING };
 
 	cocos2d::Sprite* view;
 	uint8_t color;
@@ -40,7 +42,8 @@ public:
 
 class Block : public Square {
 public:
-	Block(cocos2d::Node* parent_view, float width, uint8_t color);
+	Block(uint8_t color);
+	void Init(cocos2d::Node* parent_view, float width);
 	~Block();
 };
 
@@ -61,34 +64,50 @@ class Empty : public Square {
 
 class Board : public cocos2d::Node {
 private:
-	class Position {
-	public:
+	struct Position {
 		Position(uint32_t x, uint32_t y) : x(x), y(y) {}
 		uint32_t x, y;
 	};
-	std::vector<std::string> block_paths_;
-	float block_size_;
+
+	// The matrix containing all the blocks
+	std::deque<std::vector<std::unique_ptr<Square> > > squares;
+	// The current position of the cursor
 	Position cursor_pos_;
+	// The offset size of the cursor (so that it is correctly aligned with the blocks)
 	float cursor_offset_;
-	cocos2d::Sprite* cursor;
+	// Sprite of the cursor
+	cocos2d::Sprite* cursor_;
+	// Cumulated delta time, to know when to tick a Physic Step
 	float time_step_;
+	// Configuration of the session
+	Session config_;
+	PhysicEngine engine_;
+	// Bottom block generator
+	BlockGenerator block_generator_;
+
+	// Private ctor for cocos2d-x
 	Board(Session& config);
 
 public:
-	cocos2d::Label *fps;
-	enum class Fill : unsigned char { EMPTY, RANDOMLY };
-	std::deque<std::vector<std::unique_ptr<Square> > > squares;
-	void AddLine(Fill filling = Fill::EMPTY);
-	Session config;
-	enum class Direction : unsigned char { UP, RIGHT, DOWN, LEFT };
-	void MoveCursor(Direction d);
-	void Swap();
-	void Scroll();
+	// cocos2d-x Node's functions
 	bool init(cocos2d::Size size);
 	virtual void update(float delta) override;
 	static Board* create(Session& matrix, cocos2d::Size size);
+
+	// Direction of cursor movements
+	enum class Direction : unsigned char { UP, RIGHT, DOWN, LEFT };
+
+	// Add a anew line of blocks using the creep
+	void AddLine();
+	// Change the cursor position
+	void MoveCursor(Direction d);
+	// Swap two blocks at cursor position
+	void Swap();
+	void Scroll();
+	void MoveUp();
+	void ResetPosition();
+	// Reset position of all block views in squares_
 	void PositionViews();
-	void PhysicStep();
 };
 
 #endif

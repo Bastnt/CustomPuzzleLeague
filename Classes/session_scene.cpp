@@ -45,17 +45,25 @@ bool SessionScene::init()
 
 	auto board = Board::create(config, { window_size.height*config.width / config.height, window_size.height - 2 * config.margin });
 
-	board->AddLine(Board::Fill::RANDOMLY);
-	board->AddLine(Board::Fill::RANDOMLY);
-	board->AddLine(Board::Fill::RANDOMLY);
-	board->AddLine(Board::Fill::RANDOMLY);
+	board->AddLine();
+	board->AddLine();
+	board->AddLine();
+	board->AddLine();
+	board->setAnchorPoint({ 1.f, 0.077f });
 	
-	board->setPosition({ window_size.width / 2.f, window_size.height / 2.f });
-	board->setAnchorPoint({ .5f, .5f });
+	board->setPosition({ window_size.width, 0 });
+
+	auto frame = DrawNode::create();
+	frame->setContentSize({ window_size.height*config.width / config.height, window_size.height - 2 * config.margin });
+	auto fsize = frame->getContentSize();
+	frame->drawRect({ 0, 0 }, { fsize.width, fsize.height }, { 1.f, 1.f, 1.f, 1.f });
+	frame->setAnchorPoint({ 1.f,0 });
+	frame->setPosition({ window_size.width,0 });
+	addChild(frame);
 
 	addChild(board);
-
 	auto listener = EventListenerKeyboard::create();
+	
 
 	auto listener2 = EventListenerGamepad::create();
 	listener2->onPressed = [board](EventInputGamepad* event)

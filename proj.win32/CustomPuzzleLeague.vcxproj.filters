@@ -21,9 +21,12 @@
     </Filter>
     <Filter Include="src\utils">
       <UniqueIdentifier>{e5f22950-184e-4601-8ee6-0f77f6467c46}</UniqueIdentifier>
-  	</Filter>
+    </Filter>
     <Filter Include="src\model">
       <UniqueIdentifier>{9df35b82-84fe-48c1-90e2-a6cdc0c29b35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\board">
+      <UniqueIdentifier>{24129ecb-2b7e-4cad-b39f-3fdd2b3d538d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -48,17 +51,8 @@
     <ClCompile Include="..\Classes\scene_manager.cpp">
       <Filter>src\engine</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\start_screen.cpp">
-      <Filter>src\scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\start_screen.h">
-      <Filter>src\scenes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\app_delegate.cpp">
       <Filter>src\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\board.cpp">
-      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\session.cpp">
       <Filter>src</Filter>
@@ -68,7 +62,7 @@
     </ClCompile>
     <ClCompile Include="..\Classes\random_generator.cpp">
       <Filter>src\utils</Filter>
-  	</ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Classes\lobby_scene.cpp">
       <Filter>src\scenes</Filter>
     </ClCompile>
@@ -90,6 +84,13 @@
     <ClCompile Include="..\Classes\character.cpp">
       <Filter>src\model</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\block_generator.cpp">
+      <Filter>src\board</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\board.cpp">
+      <Filter>src\board</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\physic_engine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -117,9 +118,6 @@
       <Filter>src\engine</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\session.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\board.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\session_scene.h">
@@ -155,6 +153,13 @@
     <ClInclude Include="..\Classes\character.h">
       <Filter>src\model</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\block_generator.h">
+      <Filter>src\board</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\board.h">
+      <Filter>src\board</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\physic_engine.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

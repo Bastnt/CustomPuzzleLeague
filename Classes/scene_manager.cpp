@@ -35,7 +35,7 @@ SceneManager::SceneManager() : director_ { cocos2d::Director::getInstance() }, s
 
 void SceneManager::StartInitialScene()
 {
-	scenes_[0] = StartScene::createScene();
+	scenes_[0] = SessionScene::createScene();
 	scenes_[0]->retain();
 	director_->runWithScene(scenes_[0]);
 }
@@ -67,6 +67,14 @@ void SceneManager::ChangeScene(SceneId scene_id, TransitionPolicy transition_pol
 		if(!scenes_[index])
 		{
 			scenes_[index] = LobbyScene::createScene();
+			scenes_[index]->retain();
+		}
+	} break;
+	case SceneId::SOLO:
+	{
+		if (!scenes_[index])
+		{
+			scenes_[index] = SessionScene::createScene();
 			scenes_[index]->retain();
 		}
 	} break;

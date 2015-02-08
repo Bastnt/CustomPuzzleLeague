@@ -152,8 +152,8 @@ std::unique_ptr<Gamepad> GamepadManager::ConstructDefaultGamepad(cocos2d::Joysti
 
 		std::vector<Gamepad::AxeMapping> axe_mappings 
 		{
-			{ .4f, In::RIGHT, In::LEFT, {true, cocos2d::RepetitionClock::Milli(700), cocos2d::RepetitionClock::Milli(150)}},
-			{ .4f, In::DOWN, In::UP, {true, cocos2d::RepetitionClock::Milli(700), cocos2d::RepetitionClock::Milli(150)}},
+			{ .4f, In::RIGHT, In::LEFT, {true, cocos2d::RepetitionClock::Milli(300), cocos2d::RepetitionClock::Milli(17)}},
+			{ .4f, In::DOWN, In::UP, { true, cocos2d::RepetitionClock::Milli(300), cocos2d::RepetitionClock::Milli(17) } },
 			{ 1.1f, In::NONE, In::NONE, {}},
 			{ 1.1f, In::NONE, In::NONE, {}},
 			{ 1.1f, In::NONE, In::NONE, {}},
@@ -162,7 +162,7 @@ std::unique_ptr<Gamepad> GamepadManager::ConstructDefaultGamepad(cocos2d::Joysti
 		//Changing the repetition clocks for the POV buttons:
 		for(std::size_t i = 10U; i < 14; ++i)
 		{
-			joy.repetition_clocks[i].Setup(true, cocos2d::RepetitionClock::Milli(700), cocos2d::RepetitionClock::Milli(150));
+			joy.repetition_clocks[i].Setup(true, cocos2d::RepetitionClock::Milli(300), cocos2d::RepetitionClock::Milli(17));
 		}
 		return std::make_unique<Gamepad>(std::move(button_mappings), std::move(axe_mappings), joy.getName());
 	}
