@@ -14,4 +14,6 @@ Session::Session() :
 	dying_time(60.f),
 	swap_time(4.f),
 	hanging_time(10.f)
-{}
+{
+	players.reserve(16u);
+}

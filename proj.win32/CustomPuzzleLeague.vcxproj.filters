@@ -21,7 +21,7 @@
     </Filter>
     <Filter Include="src\utils">
       <UniqueIdentifier>{e5f22950-184e-4601-8ee6-0f77f6467c46}</UniqueIdentifier>
-  	</Filter>
+    </Filter>
     <Filter Include="src\model">
       <UniqueIdentifier>{9df35b82-84fe-48c1-90e2-a6cdc0c29b35}</UniqueIdentifier>
     </Filter>
@@ -48,12 +48,6 @@
     <ClCompile Include="..\Classes\scene_manager.cpp">
       <Filter>src\engine</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\start_screen.cpp">
-      <Filter>src\scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\start_screen.h">
-      <Filter>src\scenes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\app_delegate.cpp">
       <Filter>src\engine</Filter>
     </ClCompile>
@@ -68,7 +62,7 @@
     </ClCompile>
     <ClCompile Include="..\Classes\random_generator.cpp">
       <Filter>src\utils</Filter>
-  	</ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Classes\lobby_scene.cpp">
       <Filter>src\scenes</Filter>
     </ClCompile>
@@ -92,6 +86,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\block_theme.cpp">
       <Filter>src\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\player_lobby.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +157,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\block_theme.h">
       <Filter>src\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\player_lobby.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

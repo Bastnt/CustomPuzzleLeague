@@ -39,7 +39,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	
 	glview->setFrameSize(800,450);//windows
     glview->setDesignResolutionSize(1920, 1080, ResolutionPolicy::SHOW_ALL);//intern
-	glview->setFrameSize(800, 450);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1. / 60.);
@@ -49,7 +48,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	SceneManager::Init();
 	ThemeManager::Init();
 	ProfileManager::Init();
-	ProfileManager::Instance().LoadProfiles();
+	//ProfileManager::Instance().LoadProfiles();
+
+	//LOAD PROFILES SEEMS TO BE BUGGING
 
 	// Start first scene
 	SceneManager::Instance().StartInitialScene();

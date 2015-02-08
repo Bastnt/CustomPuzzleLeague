@@ -66,6 +66,21 @@ bool MainMenuScene::init()
 		{
 			SceneManager::Instance().ChangeScene(SceneId::START, TransitionPolicy::SLIDE_IN_L);
 		}
+		else if(input == EventInputGamepad::Input::VALIDATION_SWAP)
+		{
+			switch (current_state_)
+			{
+			case MainMenuScene::State::SOLO:
+				break;
+			case MainMenuScene::State::MULTIPLAYER:
+				SceneManager::Instance().ChangeScene(SceneId::LOBBY, TransitionPolicy::SLIDE_IN_R);
+				break;
+			case MainMenuScene::State::OPTIONS:
+				break;
+			default:
+				break;
+			}
+		}
 	};
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
