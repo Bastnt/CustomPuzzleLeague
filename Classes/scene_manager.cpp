@@ -39,7 +39,7 @@ SceneManager::SceneManager() : director_ { cocos2d::Director::getInstance() }, s
 
 void SceneManager::StartInitialScene()
 {
-	scenes_[0] = StartScene::createScene();
+	scenes_[0] = SessionScene::createScene();
 	scenes_[0]->retain();
 	director_->runWithScene(scenes_[0]);
 }
